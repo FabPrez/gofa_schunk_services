@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>gofa_schunk_services</name>
+  <version>0.0.0</version>
+  <description>The gofa_shunk_services package</description>
+
+  <maintainer email="fabioprez@todo.todo">fabioprez</maintainer>
+
+  <license>TODO</license>
+
+  <!--   <doc_depend>doxygen</doc_depend> -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>moveit_core</build_depend>
+  <build_depend>moveit_ros_planning</build_depend>
+  <build_depend>moveit_ros_planning_interface</build_depend>
+  <build_depend>message_runtime</build_depend>
+  <build_depend>moveit_visual_tools</build_depend>
+  <build_depend>actionlib</build_depend>
+  <build_depend>schunk_interfaces</build_depend>
+
+
+  <build_export_depend>roscpp</build_export_depend>
+  <build_export_depend>rospy</build_export_depend>
+  <build_export_depend>sensor_msgs</build_export_depend>
+  <build_export_depend>std_msgs</build_export_depend>
+  <build_export_depend>moveit_core</build_export_depend>
+  <build_export_depend>moveit_ros_planning</build_export_depend>
+  <build_export_depend>moveit_ros_planning_interface</build_export_depend>
+  <build_export_depend>message_runtime</build_export_depend>
+  <build_export_depend>moveit_visual_tools</build_export_depend>
+  <build_export_depend>actionlib</build_export_depend>
+  <build_export_depend>schunk_interfaces</build_export_depend>
+
+
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>moveit_core</exec_depend>
+  <exec_depend>moveit_ros_planning</exec_depend>
+  <exec_depend>moveit_ros_planning_interface</exec_depend>
+  <exec_depend>message_runtime</exec_depend>
+  <exec_depend>moveit_visual_tools</exec_depend>
+  <exec_depend>actionlib</exec_depend>
+  <exec_depend>schunk_interfaces</exec_depend>
+
+  <!-- for services and messages -->
+  <build_depend>message_generation</build_depend>
+  <build_export_depend>message_generation</build_export_depend>
+  <exec_depend>message_generation</exec_depend>
+
+  <build_depend>message_runtime</build_depend>
+  <build_export_depend>message_runtime</build_export_depend>
+  <exec_depend>message_runtime</exec_depend>
+
+  <build_depend>geometry_msgs</build_depend>
+  <build_export_depend>geometry_msgs</build_export_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+
+  <!-- The export tag contains other, unspecified, tags -->
+  <export>
+    <!-- Other tools can request additional information be placed here -->
+
+  </export>
+</package>
