@@ -1,16 +1,24 @@
 <launch>
-
-    <include file="$(find omnicore_launcher)/launch/real_robot.launch">
-        <arg name="robot" value="gofa"/>
-    </include>
-
-    <include file="$(find schunk_hardware_interface)/launch/gripper.launch">
-    </include> 
-    
+    <arg name="simulated_robot" default="false"/>
     <arg name="manual_move_confirm" default="true"/>
+
+    <group if="$(arg simulated_robot)">
+        <include file="$(find omnicore_launcher)/launch/simulated_robot.launch">
+            <arg name="robot" value="gofa"/>
+        </include>
+    </group>
+    <group unless="$(arg simulated_robot)">
+        <include file="$(find omnicore_launcher)/launch/real_robot.launch">
+            <arg name="robot" value="gofa"/>
+        </include>
+
+        <include file="$(find schunk_hardware_interface)/launch/gripper.launch">
+        </include> 
+    </group>
 
     <node pkg="gofa_schunk_services" type="gofa_schunk_services" name="gofa_schunk_services_node" output="screen">
         <param name="manual_move_confirm" value="$(arg manual_move_confirm)" />
+        <param name="simulated_robot" value="$(arg simulated_robot)" />
     </node>
 
 </launch>

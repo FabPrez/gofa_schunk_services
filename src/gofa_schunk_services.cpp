@@ -4,6 +4,9 @@ Gofa_schunk_services::Gofa_schunk_services(ros::NodeHandle &nh) : nh_(nh) {
     // -- Usefull parameters --
     private_nh = ros::NodeHandle("~");
     private_nh.getParam("manual_move_confirm", this->manual_move_confirm);
+    private_nh.getParam("simulated_robot", this->simulated_robot);
+
+    ROS_INFO("Simulated robot: %s", this->simulated_robot ? "true" : "false");
     
     // services 
     srv_executeWaypoint = nh_.advertiseService("move_to", &Gofa_schunk_services::MoveToService, this);
@@ -41,6 +44,13 @@ bool Gofa_schunk_services::openGripper(void)
 {
     // * This function will open the gripper
     // * The function will return a boolean value to confirm the execution of the skill
+
+    if (this->simulated_robot)
+    {
+        ROS_INFO("Simulated robot, skipping the opening of the gripper.");
+        return true;
+    }
+
     schunk_interfaces::JogTo srv;
     srv.request.position = 0.0;
     srv.request.motion_type = 0;
@@ -72,6 +82,13 @@ bool Gofa_schunk_services::closeGripper(void)
 {
     // * This function will open the gripper
     // * The function will return a boolean value to confirm the execution of the skill
+
+    if (this->simulated_robot)
+    {
+        ROS_INFO("Simulated robot, skipping the closing of the gripper.");
+        return true;
+    }
+
     schunk_interfaces::SimpleGrip srv;
     srv.request.gripping_force = 50.0;
     if (!this->cl_simpleGrip.call(srv))

@@ -58,6 +58,7 @@ private:
 
 	// -- MoveIt! STUFF --
 	bool manual_move_confirm;
+	bool simulated_robot;
 	std::unique_ptr<moveit::planning_interface::MoveGroupInterface> move_group;
 	std::unique_ptr<moveit::planning_interface::PlanningSceneInterface> planning_scene_interface;
 	std::unique_ptr<moveit_visual_tools::MoveItVisualTools> visual_tools;
