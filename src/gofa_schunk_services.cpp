@@ -161,6 +161,9 @@ void Gofa_schunk_services::initMoveit(void)
     // visual tools are needed to use the rviz visual gui
     visual_tools = std::make_unique<moveit_visual_tools::MoveItVisualTools>("base");
 
+    move_group->setMaxVelocityScalingFactor(0.1);
+    move_group->setMaxAccelerationScalingFactor(0.1);
+
     ROS_INFO("Moveit! is ready.");
 }
 

@@ -8,9 +8,9 @@
         </include>
     </group>
     <group unless="$(arg simulated_robot)">
-        <include file="$(find omnicore_launcher)/launch/real_robot.launch">
+        <!-- <include file="$(find omnicore_launcher)/launch/real_robot.launch">
             <arg name="robot" value="gofa"/>
-        </include>
+        </include> -->
 
         <include file="$(find schunk_hardware_interface)/launch/gripper.launch">
         </include> 
