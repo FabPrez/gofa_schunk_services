@@ -109,19 +109,20 @@ bool Gofa_schunk_services::MoveToService(gofa_schunk_services::MoveTo::Request& 
 
     for (int i = 0; i < n_attemps; i++)
     {
-        ROS_INFO("Trying to move with a MOVEL");
+        ROS_INFO("Trying to move with a MOVEL iteration %d", i);
+        
         if (moveLToPose(targetPose))
         {
             res.success = true;
             return true;
         }
-        ROS_INFO("MOVEL failed, trying with a MOVEJ");
+        ROS_INFO("MOVEL failed, trying with a MOVEJ iteration %d", i);
         if (moveJToPose(targetPose))
         {
             res.success = true;
             return true;
         }
-        ROS_INFO("MOVEJ failed, trying again...");
+        ROS_INFO("MOVEJ failed, trying again... with next iteration ");
         if (i==1)
         {
             //move to home position
