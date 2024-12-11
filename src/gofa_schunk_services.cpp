@@ -181,8 +181,18 @@ bool Gofa_schunk_services::moveJToPose(geometry_msgs::PoseStamped targetPose)
     {
         if (this->manual_move_confirm)
             this->visual_tools->prompt("Press 'next' in the RvizVisualToolsGui window to execute the MoveJ.");
-        this->move_group->execute(my_plan);
-        return true;
+        auto execute_result = this->move_group->execute(my_plan);
+
+        if (execute_result == moveit::planning_interface::MoveItErrorCode::SUCCESS)
+        {
+            ROS_INFO("Movement executed successfully.");
+            return true;
+        }
+        else
+        {
+            ROS_ERROR("Movement execution failed.");
+            return false;
+        }
     }
     else
     {
