@@ -113,12 +113,14 @@ bool Gofa_schunk_services::MoveToService(gofa_schunk_services::MoveTo::Request& 
         
         if (moveLToPose(targetPose))
         {
+            ROS_INFO("MOVEL succeeded");
             res.success = true;
             return true;
         }
         ROS_INFO("MOVEL failed, trying with a MOVEJ iteration %d", i);
         if (moveJToPose(targetPose))
         {
+            ROS_INFO("MOVEJ succeeded");
             res.success = true;
             return true;
         }
@@ -128,6 +130,8 @@ bool Gofa_schunk_services::MoveToService(gofa_schunk_services::MoveTo::Request& 
             //move to home position
         }
     }
+
+    
     return res.success = false;
     return false;
     // Try to execute this with MoveL and MoveJ trying to execute it even when the first planning get wrong
