@@ -131,8 +131,8 @@ bool Gofa_schunk_services::MoveToService(gofa_schunk_services::MoveTo::Request& 
         }
     }
 
-    ROS_INFO("MOVE TO FAILED!");
-    return res.success = false;
+    ROS_ERROR("!!!!!MOVEMENT FAILED!!!!!");
+    res.success = false;
     return false;
     // Try to execute this with MoveL and MoveJ trying to execute it even when the first planning get wrong
     // bool move_success = this->moveLToPose(targetPose);
