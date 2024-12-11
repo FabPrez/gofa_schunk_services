@@ -131,7 +131,7 @@ bool Gofa_schunk_services::MoveToService(gofa_schunk_services::MoveTo::Request& 
         }
     }
 
-    
+    ROS_INFO("MOVE TO FAILED!");
     return res.success = false;
     return false;
     // Try to execute this with MoveL and MoveJ trying to execute it even when the first planning get wrong
@@ -179,6 +179,9 @@ bool Gofa_schunk_services::moveJToPose(geometry_msgs::PoseStamped targetPose)
     moveit::planning_interface::MoveGroupInterface::Plan my_plan;
     bool success = (this->move_group->plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
     ROS_INFO_NAMED("MoveJ gofa_arm", "Planning of Move J to (pose goal): %s", success ? "SUCCESS" : "FAILED");
+
+    move_group->setMaxVelocityScalingFactor(0.05);
+    move_group->setMaxAccelerationScalingFactor(0.05);
 
     if (success)
     {
