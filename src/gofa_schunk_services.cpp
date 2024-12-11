@@ -105,11 +105,34 @@ bool Gofa_schunk_services::MoveToService(gofa_schunk_services::MoveTo::Request& 
     // * So it want execute the overall skill
     // * The function will return a boolean value to confirm the execution of the skill
     geometry_msgs::PoseStamped targetPose = req.next_waypoint;
+    int n_attemps = 3;
 
+    for (int i = 0; i < n_attemps; i++)
+    {
+        ROS_INFO("Trying to move with a MOVEL");
+        if (moveLToPose(targetPose))
+        {
+            res.success = true;
+            return true;
+        }
+        ROS_INFO("MOVEL failed, trying with a MOVEJ");
+        if (moveJToPose(targetPose))
+        {
+            res.success = true;
+            return true;
+        }
+        ROS_INFO("MOVEJ failed, trying again...");
+        if (i==1)
+        {
+            //move to home position
+        }
+    }
+    return res.success = false;
+    return false;
     // Try to execute this with MoveL and MoveJ trying to execute it even when the first planning get wrong
-    bool move_success = this->moveLToPose(targetPose);
-    res.success = move_success;  
-    return true;
+    // bool move_success = this->moveLToPose(targetPose);
+    // res.success = move_success;  
+    // return true;
 }
 
 void Gofa_schunk_services::spinner(void)
@@ -264,4 +287,3 @@ void Gofa_schunk_services::tryMove(void)
     moveLToPose(pose4);
     ROS_INFO("Moved to pose 4");
 }
-
