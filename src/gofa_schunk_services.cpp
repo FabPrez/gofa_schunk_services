@@ -175,13 +175,14 @@ bool Gofa_schunk_services::moveJToPose(geometry_msgs::PoseStamped targetPose)
     // Set the target pose
     this->move_group->setPoseTarget(targetPose);
     this->move_group->setPlannerId("PTP");
+
+    move_group->setMaxVelocityScalingFactor(0.05);
+    move_group->setMaxAccelerationScalingFactor(0.05);
+
     // Plan the trajectory
     moveit::planning_interface::MoveGroupInterface::Plan my_plan;
     bool success = (this->move_group->plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
     ROS_INFO_NAMED("MoveJ gofa_arm", "Planning of Move J to (pose goal): %s", success ? "SUCCESS" : "FAILED");
-
-    move_group->setMaxVelocityScalingFactor(0.05);
-    move_group->setMaxAccelerationScalingFactor(0.05);
 
     if (success)
     {
@@ -215,6 +216,10 @@ bool Gofa_schunk_services::moveLToPose(geometry_msgs::PoseStamped targetPose)
     // Set the target pose
     this->move_group->setPoseTarget(targetPose);
     this->move_group->setPlannerId("LIN");
+
+    move_group->setMaxVelocityScalingFactor(0.1);
+    move_group->setMaxAccelerationScalingFactor(0.1);
+    
     // Plan the trajectory
     moveit::planning_interface::MoveGroupInterface::Plan my_plan;
     bool success = (this->move_group->plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
