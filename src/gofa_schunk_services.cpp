@@ -161,8 +161,8 @@ void Gofa_schunk_services::initMoveit(void)
     // visual tools are needed to use the rviz visual gui
     visual_tools = std::make_unique<moveit_visual_tools::MoveItVisualTools>("base");
 
-    move_group->setMaxVelocityScalingFactor(0.1);
-    move_group->setMaxAccelerationScalingFactor(0.1);
+    move_group->setMaxVelocityScalingFactor(0.15);
+    move_group->setMaxAccelerationScalingFactor(0.15);
 
     ROS_INFO("Moveit! is ready.");
 }
@@ -180,8 +180,8 @@ bool Gofa_schunk_services::moveJToPose(geometry_msgs::PoseStamped targetPose)
     bool success = (this->move_group->plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
     ROS_INFO_NAMED("MoveJ gofa_arm", "Planning of Move J to (pose goal): %s", success ? "SUCCESS" : "FAILED");
 
-    move_group->setMaxVelocityScalingFactor(0.05);
-    move_group->setMaxAccelerationScalingFactor(0.05);
+    move_group->setMaxVelocityScalingFactor(0.1);
+    move_group->setMaxAccelerationScalingFactor(0.1);
 
     if (success)
     {
